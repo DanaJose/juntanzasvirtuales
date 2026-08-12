@@ -1,0 +1,488 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap');
+ 
+:root {
+  --tinta: #1C1B20;
+  --tinta-suave: #26242C;
+  --arena: #EDE6D6;
+  --arena-suave: #C9C2B2;
+  --salvia: #8FA88E;
+  --salvia-suave: #5C6E5C;
+  --rosa: #C58B8F;
+  --oro: #CBA96A;
+  --radio: 14px;
+  --sombra: 0 12px 40px rgba(0,0,0,0.35);
+}
+ 
+* { box-sizing: border-box; }
+ 
+body {
+  margin: 0;
+  /* Capa de tinte oscuro sobre tu imagen de fondo para mantener la legibilidad */
+  background: linear-gradient(rgba(12, 12, 12, 0.55), rgba(0, 0, 0, 0.55)),
+    var(--tinta) url('img/fondo.svg') no-repeat center center fixed; /* <-- Cambia 'fondo.jpg' por el nombre de tu imagen (jpg, png, svg) */
+  background-size: cover;
+  color: var(--arena);
+  font-family: 'Work Sans', sans-serif;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+ 
+h1, h2, h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 0 0 0.6em 0;
+}
+ 
+h1 { font-size: clamp(1.6rem, 4vw, 2.3rem); }
+h2 { font-size: 1.15rem; color: var(--oro); }
+h3 { font-size: 1.05rem; margin-bottom: 0.3em; }
+ 
+p { line-height: 1.6; }
+ 
+#header-logo {
+  height: 100px;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+}
+ 
+#header-texto {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 1rem;
+}
+ 
+#site-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 2rem;
+}
+ 
+#site-footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--arena-suave);
+}
+ 
+/* --- fondo respirante: halos sobre la imagen --- */
+.fondo-respiracion {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+ 
+.halo {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.28;
+  animation: respirar 9s ease-in-out infinite;
+}
+ 
+.halo-1 {
+  width: 46vw;
+  height: 46vw;
+  background: var(--salvia);
+  top: -10vw;
+  left: -8vw;
+}
+ 
+.halo-2 {
+  width: 38vw;
+  height: 38vw;
+  background: var(--rosa);
+  bottom: -12vw;
+  right: -6vw;
+  animation-delay: 3.5s;
+}
+ 
+@keyframes respirar {
+  0%, 100% { transform: scale(1); opacity: 0.22; }
+  50% { transform: scale(1.15); opacity: 0.34; }
+}
+ 
+@media (prefers-reduced-motion: reduce) {
+  .halo { animation: none; opacity: 0.24; }
+}
+ 
+.contenedor {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+ 
+/* --- progreso --- */
+.progreso {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 3rem;
+}
+ 
+.punto {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--tinta-suave);
+  border: 1px solid var(--arena-suave);
+  position: relative;
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+ 
+.punto.activo, .punto.completo {
+  background: var(--salvia);
+  border-color: var(--salvia);
+}
+ 
+.punto-label {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--arena-suave);
+  white-space: nowrap;
+}
+ 
+.punto.activo .punto-label { color: var(--oro); }
+ 
+.linea {
+  width: 40px;
+  height: 1px;
+  background: var(--arena-suave);
+  opacity: 0.4;
+}
+ 
+.linea.activo {
+  background: var(--salvia);
+  opacity: 0.8;
+}
+ 
+/* --- hojas --- */
+.hoja {
+  display: none;
+  animation: aparecer 0.5s ease;
+}
+ 
+.hoja.activa { display: block; }
+ 
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+ 
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  color: var(--salvia);
+  margin: 0 0 0.6em 0;
+}
+ 
+.texto-intro { color: var(--arena); opacity: 0.92; margin-bottom: 1.6rem; }
+.texto-secundario { color: var(--arena-suave); font-size: 0.9rem; }
+ 
+.tarjeta-info, .tarjeta-consentimiento {
+  background: var(--tinta-suave);
+  border: 1px solid rgba(237,230,214,0.08);
+  border-radius: var(--radio);
+  padding: 1.4rem 1.5rem;
+  margin-bottom: 1.2rem;
+  color: #333;;
+}
+ 
+.lista-pasos { margin: 0; padding-left: 1.1rem; }
+.lista-pasos li { margin-bottom: 0.6em; }
+ 
+.checkbox-consentimiento {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  cursor: pointer;
+  font-size: 0.92rem;
+  color: var(--arena);
+}
+ 
+.checkbox-consentimiento input {
+  margin-top: 0.2rem;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--salvia);
+  flex-shrink: 0;
+}
+ 
+/* --- formulario --- */
+.grupo-preguntas {
+  border: none;
+  padding: 0;
+  margin: 0 0 2.2rem 0;
+}
+ 
+.grupo-preguntas legend {
+  font-family: 'Fraunces', serif;
+  color: var(--oro);
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+  padding: 0;
+}
+ 
+.campo {
+  display: block;
+  margin-bottom: 1.2rem;
+}
+ 
+.campo-label {
+  display: block;
+  font-size: 0.88rem;
+  margin-bottom: 0.5rem;
+  color: var(--arena);
+}
+ 
+.campo-label em { color: var(--arena-suave); font-style: normal; }
+ 
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="file"],
+textarea {
+  width: 100%;
+  background: var(--tinta-suave);
+  border: 1px solid rgba(237,230,214,0.12);
+  border-radius: 8px;
+  color: var(--arena);
+  padding: 0.7rem 0.9rem;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.92rem;
+  resize: vertical;
+}
+ 
+input[type="file"] {
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+ 
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="file"]:focus,
+textarea:focus,
+.slider:focus-visible,
+.btn:focus-visible,
+.checkbox-consentimiento input:focus-visible {
+  outline: 2px solid var(--oro);
+  outline-offset: 2px;
+}
+ 
+.grid-checkbox, .grid-radio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+ 
+/* --- chips (etiquetas seleccionables) --- */
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--tinta-suave);
+  border: 1px solid rgba(237,230,214,0.12);
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.84rem;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+ 
+.chip:has(input:checked) {
+  border-color: var(--salvia);
+  background: rgba(143,168,142,0.15);
+}
+ 
+.chip input { accent-color: var(--salvia); }
+ 
+/* --- zonas para agrupar campos visualmente --- */
+.zona {
+  background: var(--tinta-suave);
+  border: 1px solid rgba(237,230,214,0.08);
+  border-radius: var(--radio);
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 1rem;
+}
+ 
+.zona-general {
+  border-color: rgba(203,169,106,0.3);
+}
+ 
+.zona-escala {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0.6rem 0 0.9rem;
+}
+ 
+.escala-extremo {
+  font-size: 0.72rem;
+  color: var(--arena-suave);
+  white-space: nowrap;
+  min-width: 62px;
+}
+ 
+.escala-extremo:last-child { text-align: right; }
+ 
+.slider {
+  flex: 1;
+  accent-color: var(--salvia);
+  height: 4px;
+}
+ 
+.zona-texto {
+  width: 100%;
+  min-height: 2.4rem;
+}
+ 
+/* --- navegación --- */
+.nav-hoja {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+ 
+.nav-final { justify-content: center; }
+ 
+.nota-nav {
+  font-size: 0.8rem;
+  color: var(--arena-suave);
+}
+ 
+.btn {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.8rem 1.5rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+ 
+.btn:active { transform: scale(0.97); }
+ 
+.btn-primario {
+  background: var(--salvia);
+  color: var(--tinta);
+}
+ 
+.btn-primario:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+ 
+.btn-primario:not(:disabled):hover { background: #A0BA9F; }
+ 
+.btn-secundario {
+  background: transparent;
+  color: var(--arena-suave);
+  border: 1px solid rgba(237,230,214,0.2);
+}
+ 
+.btn-secundario:hover { color: var(--arena); border-color: var(--arena-suave); }
+ 
+#confirmacion-descarga {
+  text-align: center;
+  margin-top: 1rem;
+  min-height: 1.4em;
+  color: var(--salvia);
+}
+ 
+@media (max-width: 480px) {
+  .punto-label { display: none; }
+  .linea { width: 22px; }
+}
+ 
+/* ==========================================================
+   AGREGADO PARA EL FORMULARIO DE INSCRIPCIÓN A MÓDULOS (VIA)
+   Radios estilo pastilla + tarjetas de módulo seleccionables
+   ========================================================== */
+ 
+/* --- Sí / No en pastillas, mismo lenguaje visual que .chip --- */
+.opciones-radio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+ 
+.opcion-radio {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--tinta-suave);
+  border: 1px solid rgba(237,230,214,0.12);
+  border-radius: 999px;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+ 
+.opcion-radio:has(input:checked) {
+  border-color: var(--salvia);
+  background: rgba(143,168,142,0.15);
+}
+ 
+.opcion-radio input {
+  accent-color: var(--salvia);
+}
+ 
+/* --- campo que aparece condicionalmente (ej. "¿cuál pueblo?") --- */
+.campo-condicional {
+  animation: aparecer 0.4s ease;
+}
+ 
+/* --- tarjetas de módulo (checkbox + tarjeta-info combinados) --- */
+.tarjeta-modulo {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+ 
+.tarjeta-modulo:has(.checkbox-modulo:checked) {
+  border-color: var(--salvia);
+  background: rgba(143,168,142,0.14);
+}
+ 
+.checkbox-modulo {
+  margin-top: 0.3rem;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--salvia);
+  flex-shrink: 0;
+}
+ 
+.modulo-contenido h2 {
+  margin-bottom: 0.3rem;
+  font-size: 1rem;
+}
+ 
+.modulo-contenido p {
+  margin: 0;
+}
